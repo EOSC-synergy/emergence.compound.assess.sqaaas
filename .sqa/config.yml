@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/josephine400/emergence.compound:
+      branch: main
+      repo: https://github.com/josephine400/emergence.compound
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/josephine400/emergence.compound git:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-aqua-octopus.sh
+        container: qc.acc_flabby-magenta-chinook
+  QC.Doc:
+    repos:
+      github.com/josephine400/emergence.compound find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-magenta-chin.sh
+        container: qc.doc_crappy-coral-dragon
+      github.com/josephine400/emergence.compound git:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-salmon-indri.sh
+        container: qc.doc_stinky-charcoal-fousek
+      github.com/josephine400/emergence.compound markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-taupe-ibis.sh
+        container: qc.doc_shaky-cinnabar-gerbil
+  QC.Lic:
+    repos:
+      github.com/josephine400/emergence.compound licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-gamboge-gharial.sh
+        container: qc.lic_snippy-asparagus-hyena
+  QC.Ver:
+    repos:
+      github.com/josephine400/emergence.compound get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-platinum-orangutan.sh
+        container: qc.ver_foggy-tan-birman
+timeout: 5400
